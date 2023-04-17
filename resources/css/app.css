@@ -1,0 +1,27 @@
+body>header {
+    background-color: #140f21;
+}
+
+body>header h1 {
+    color: azure;
+    max-width: 1200px;
+    margin: 1rem auto;
+}
+
+header>nav a, header>nav a:visited {
+    color: azure;
+}
+
+#receita>article>form{
+    flex: 1;
+    display: flex;
+    gap:20px;
+}
+
+#receita>article input{
+    flex: 1;
+}
+
+#copyForm>p>input{
+    width: 100%;
+}
