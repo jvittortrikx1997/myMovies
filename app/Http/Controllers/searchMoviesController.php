@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 
 
-class searchMoviesController extends Controller
+class SearchMoviesController extends Controller
 {
     public function showMovie($id)
     {
@@ -19,7 +19,8 @@ class searchMoviesController extends Controller
         $params = ['langauge' => 'pt-BR', 'id_movie' => $id];
         $movieDetails = $apiMovie->getMovies($params);
 
-        //return view('movie-details', ['movie' => $movieDetails]);
+        dd($movieDetails);
 
+        //return view('movie-details', ['movie' => $movieDetails]);
     }
 }
