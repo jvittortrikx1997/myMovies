@@ -19,8 +19,6 @@ class SearchMoviesController extends Controller
         $params = ['langauge' => 'pt-BR', 'id_movie' => $id];
         $movieDetails = $apiMovie->getMovies($params);
 
-        dd($movieDetails);
-
-        //return view('movie-details', ['movie' => $movieDetails]);
+        return $movieDetails;
     }
 }

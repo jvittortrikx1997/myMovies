@@ -11,46 +11,35 @@
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-    <header>
-        <h1>My Movies 🎬</h1>
+    <header class="d-flex justify-content-between align-items-center">
+     <div>
+        <h1 class="align-self-start">My Movies 🎬</h1>
+    </div>
+    <div class="ml-auto">
+        <a href="" class="btn mr-2 my-btn">Login</a>
+        <a href="{{ route('cadastro') }}" class="btn ml-2 my-btn">Cadastrar</a>
+    </div>
     </header>
     <main>
-        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-              <div class="carousel-item active" data-bs-interval="10000">
-                <img src="..." class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>First slide label</h5>
-                  <p>Some representative placeholder content for the first slide.</p>
+              @foreach ($result as $index => $movie)
+                <div class="carousel-item{{ $index === 0 ? ' active' : '' }}">
+                  <div class="d-flex flex-column align-items-center justify-content-center">
+                    <img src="https://image.tmdb.org/t/p/w500/{{ $movie->poster_path }}" alt="{{ $movie->title }}" class="mx-auto d-block w-25 h-50">
+
+                    <h5 class="text-center mt-2">{{ $movie->title }}</h5>
                 </div>
-              </div>
-              <div class="carousel-item" data-bs-interval="2000">
-                <img src="..." class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>Second slide label</h5>
-                  <p>Some representative placeholder content for the second slide.</p>
                 </div>
-              </div>
-              <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>Third slide label</h5>
-                  <p>Some representative placeholder content for the third slide.</p>
-                </div>
-              </div>
+              @endforeach
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
+              <span class="visually-hidden">Anterior</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
+              <span class="visually-hidden">Próximo</span>
             </button>
           </div>
     </main>

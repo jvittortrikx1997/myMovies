@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\lancamentosDBApi;
+use App\LatestMoviesService;
 use Illuminate\Http\Request;
 
 class LatestMoviesController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $movies = $latestMoviesService->getLatestMovies();
+        $movies = new LatestMoviesService();
+        $result = $movies->getLatestMovies();
 
-        dd($movies);
-        //return view('latest-movies', ['movies' => $movies]);
+        return view('home', compact('result'));
     }
 }

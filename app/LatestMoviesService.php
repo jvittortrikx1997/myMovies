@@ -12,7 +12,7 @@ class LatestMoviesService
     public function __construct()
     {
         $this->apiKey = config('services.tmdb.key');
-        $this->apiUrl = 'https://api.themoviedb.org/3/movie/latest';
+        $this->apiUrl = 'https://api.themoviedb.org/3/movie/popular';
     }
 
     public function getLatestMovies()
@@ -20,11 +20,8 @@ class LatestMoviesService
         $response = Http::get($this->apiUrl, [
             'api_key' => $this->apiKey,
         ]);
-
-        $movies = $response->json();
-
+        $movies = json_decode($response->getBody())->results;
         return $movies;
-
     }
 }
 ?>
