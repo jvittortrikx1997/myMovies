@@ -12,6 +12,10 @@ header>nav a, header>nav a:visited {
     color: azure;
 }
 
+.cadastro{
+    text-align: center;
+}
+
 #receita>article>form{
     flex: 1;
     display: flex;
@@ -25,3 +29,4 @@ header>nav a, header>nav a:visited {
 #copyForm>p>input{
     width: 100%;
 }
+
