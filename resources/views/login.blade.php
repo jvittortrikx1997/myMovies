@@ -14,7 +14,7 @@
        </div>
     </header>
  <main>
-    <form method="POST" class="cadastro" name="cadastro" id="cadastro" action="{{ route('register') }}">
+    <form method="POST" class="login" name="login" id="login" action="{{ route('register') }}">
         @csrf
         <div class="d-flex flex-column align-items-center justify-content-center">
             <div class="col-5">
@@ -29,19 +29,7 @@
                         Password:
                     </div>
                     <div>
-                        <input name="password" id="password" type="password">
-                    </div>
-                    <div>
-                        Confirm Password:
-                    </div>
-                    <div>
-                        <input name="confirm_password" id="confirm_password" type="password">
-                    </div>
-                    <div>
-                        E-Mail:
-                    </div>
-                    <div>
-                        <input name="email" id="email" type="text">
+                        <input name="password" id="password" type="text">
                     </div>
                     <div>
                         @if(!empty($type) && !empty($msg))
@@ -49,7 +37,7 @@
                         @endif
                     </div>
                     <div>
-                        <button type="submit">Registrar</button>
+                        <button type="submit">Entrar</button>
                     </div>
                 </div>
             </div>

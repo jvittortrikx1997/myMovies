@@ -16,8 +16,12 @@ class AuthController extends Controller
         ], '401');
     }
 
+    public function showLoginForm(){
+        return view('login');
+    }
+
     public function register(Request $request){
-        $returnArray = ['msg' => ''];
+        $returnArray = ['msg' => '', 'type' => ''];
 
         $validator = Validator::make($request->all(), [
             'username' => 'required',
@@ -39,11 +43,13 @@ class AuthController extends Controller
             $newUser->save();
 
             $returnArray['msg'] = 'Cadastro realizado com sucesso!';
+            $returnArray['type'] = 'success';
         }else{
             $returnArray['msg'] = $validator->errors()->first();
-            return $returnArray;
+            $returnArray['type'] = 'error';
+            return view('cadastro', $returnArray);
         }
 
-        return $returnArray;
+        return view('cadastro', $returnArray);
     }
 }

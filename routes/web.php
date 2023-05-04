@@ -12,5 +12,7 @@ Route::get('/', function () {
 
 Route::get('/home', [LatestMoviesController::class, 'index'])->name('home');
 Route::get('/cadastro', [CadastroController::class, 'create'])->name('cadastro');
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
+
