@@ -14,7 +14,7 @@
        </div>
     </header>
  <main>
-    <form method="POST" class="login" name="login" id="login" action="{{ route('register') }}">
+    <form method="POST" class="login" name="login" id="login" action="{{ route('login') }}">
         @csrf
         <div class="d-flex flex-column align-items-center justify-content-center">
             <div class="col-5">

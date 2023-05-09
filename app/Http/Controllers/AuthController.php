@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-
 use App\Models\User;
+
 
 class AuthController extends Controller
 {
@@ -51,5 +51,31 @@ class AuthController extends Controller
         }
 
         return view('cadastro', $returnArray);
+    }
+
+    public function login(Request $request){
+        $arrayReturn = ['error' => '', 'type' => ''];
+
+        $validator = Validator::make($request->all(), [
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        if(!$validator->fails()){
+            $username = $request->input('username');
+            $password = $request->input('password');
+
+            $token = auth()->attempt([
+                'name' => $username,
+                'password' => $password
+            ]);
+
+        }else{
+            $arrayReturn['error'] = $validator->errors()->first();
+            $arrayReturn['type'] = 'error';
+            return $arrayReturn;
+        }
+
+        return $arrayReturn;
     }
 }
