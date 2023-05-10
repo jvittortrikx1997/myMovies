@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-
 class AuthController extends Controller
 {
     public function unauthorized(){
@@ -70,12 +69,23 @@ class AuthController extends Controller
                 'password' => $password
             ]);
 
+            if(!$token){
+                $arrayReturn['error'] = 'Usuario e/ou senha invalidos.';
+                $arrayReturn['type'] = 'error';
+            }
+
+            $arrayReturn['token'] = $token;
+            $user = auth()->user();
+            $arrayReturn['user'] = $user;
+            $properties = User::select(['id', 'name'])->where('name', $user['name'])->get();
+
+            $arrayReturn['user']['properties'] = $properties;
+
         }else{
             $arrayReturn['error'] = $validator->errors()->first();
             $arrayReturn['type'] = 'error';
             return $arrayReturn;
         }
-
-        return $arrayReturn;
+        return view('app.perfil', $arrayReturn);
     }
 }
