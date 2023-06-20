@@ -13,7 +13,7 @@
            <a href="{{ route('cadastro') }}" class="btn ml-2 my-btn">Cadastrar</a>
        </div>
     </header>
- <main>
+ <main class="container grid-lg">
     <form method="POST" class="login" name="login" id="login" action="{{ route('login') }}">
         @csrf
         <div class="d-flex flex-column align-items-center justify-content-center">

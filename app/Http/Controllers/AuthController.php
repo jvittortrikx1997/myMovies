@@ -5,18 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Responses\LoginFormView;
 use App\Models\User;
 
 class AuthController extends Controller
 {
+    private $loginFormView;
+
+    public function __construct(LoginFormView $loginFormView)
+    {
+        $this->loginFormView = $loginFormView;
+    }
+
     public function unauthorized(){
         return response()->json([
             'error' => 'Não autorizado'
         ], '401');
     }
 
-    public function showLoginForm(){
-        return view('login');
+    public function showLoginForm()
+    {
+        return $this->loginFormView->getView();
     }
 
     public function register(Request $request){
@@ -72,20 +81,19 @@ class AuthController extends Controller
             if(!$token){
                 $arrayReturn['error'] = 'Usuario e/ou senha invalidos.';
                 $arrayReturn['type'] = 'error';
+                return view('login', $arrayReturn);
+            }else{
+                $arrayReturn['token'] = $token;
+                $user = auth()->user();
+                $arrayReturn['user'] = $user;
+                $properties = User::select(['id', 'name'])->where('name', $user['name'])->get();
+                $arrayReturn['user']['properties'] = $properties;
+                return view('app.perfil', $arrayReturn);
             }
-
-            $arrayReturn['token'] = $token;
-            $user = auth()->user();
-            $arrayReturn['user'] = $user;
-            $properties = User::select(['id', 'name'])->where('name', $user['name'])->get();
-
-            $arrayReturn['user']['properties'] = $properties;
-
         }else{
             $arrayReturn['error'] = $validator->errors()->first();
             $arrayReturn['type'] = 'error';
-            return $arrayReturn;
+            return view('login', $arrayReturn);
         }
-        return view('app.perfil', $arrayReturn);
     }
 }
